@@ -25,17 +25,25 @@ class ConfigManager:
             self._config = {}
 
     def get_api_key(self) -> Optional[str]:
-        api_key = self._config.get('api', {}).get('anthropic_key')
-        if api_key and api_key.strip():
-            self._logger.info("Using API key from config file")
-            return api_key.strip()
+        # First, try to read from .api_key file
+        api_key_path = Path(".api_key")
+        if api_key_path.exists():
+            try:
+                with open(api_key_path, 'r', encoding='utf-8') as f:
+                    api_key = f.read().strip()
+                if api_key:
+                    self._logger.info("Using API key from .api_key file")
+                    return api_key
+            except Exception as e:
+                self._logger.error(f"Error reading .api_key file: {e}")
 
+        # Fallback to environment variable
         api_key = os.getenv("ANTHROPIC_API_KEY")
         if api_key and api_key.strip():
             self._logger.info("Using API key from environment variable")
             return api_key.strip()
 
-        self._logger.warning("No API key found in config or environment")
+        self._logger.warning("No API key found in .api_key file or environment")
         return None
 
     def get_language(self) -> str:

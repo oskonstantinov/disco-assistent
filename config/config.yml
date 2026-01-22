@@ -1,10 +1,6 @@
 # Application configuration
 language: ru  # Application language (can be en or ru)
 
-# API configuration
-api:
-  anthropic_key: ""  # API key
-
 # Custom prompt configuration
 custom_prompt:
   enabled: false  # Set to true to use custom prompt instead of default

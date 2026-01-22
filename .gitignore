@@ -178,3 +178,6 @@ audio/source/
 
 # Logs
 logs/
+
+# API key
+.api_key
