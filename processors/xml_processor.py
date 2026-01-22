@@ -3,6 +3,7 @@ import xml.etree.ElementTree as ET
 from models.skill_check import SkillCheck
 from config.constants import SKILL_CATEGORIES
 from utils.exceptions import XMLProcessingError
+from localization.translations import TRANSLATIONS
 import logging
 
 class XMLStreamProcessor:
@@ -55,9 +56,10 @@ class XMLStreamProcessor:
 
     def _normalize_skill_name(self, skill_name: str) -> str:
         skill_name = skill_name.strip()
+        ru_skills = TRANSLATIONS.get('ru', {}).get('skills', {})
         for category, skills in SKILL_CATEGORIES.items():
             for skill in skills:
-                if skill_name.lower() == skill.lower():
+                if skill_name.lower() == skill.lower() or skill_name.lower() == ru_skills.get(skill, '').lower():
                     return skill
         return skill_name
 

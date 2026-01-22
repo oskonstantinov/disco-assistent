@@ -19,3 +19,13 @@ class LocaleManager:
             return self._translations[self.language][category][key]
         except KeyError:
             return key
+
+    def reverse_translate(self, category: str, value: str) -> str:
+        try:
+            trans_dict = self._translations[self.language][category]
+            for k, v in trans_dict.items():
+                if v == value:
+                    return k
+            return value
+        except KeyError:
+            return value
