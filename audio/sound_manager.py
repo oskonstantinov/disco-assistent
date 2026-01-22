@@ -8,7 +8,7 @@ class SoundManager:
         self._logger = logging.getLogger(__name__)
         pygame.mixer.init()
 
-        self.sfx_path = Path(__file__).parent
+        self.sfx_path = Path(__file__).parent / 'source'
         self.sounds: Dict[str, pygame.mixer.Sound] = {}
 
         try:
