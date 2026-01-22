@@ -1,5 +1,5 @@
 # Application configuration
-language: en  # Application language (can be en or ru)
+language: ru  # Application language (can be en or ru)
 
 # API configuration
 api:
@@ -13,10 +13,10 @@ custom_prompt:
 # User context configuration
 user_context:
   enabled: false  # Set to true to include user context
-  description: "" # Description of the user/context to be included in prompts
+  description: |
+    Sample description of the user context that will be included in the prompts.
 
-# Model configuration
 model:
-  name: "claude-3-5-sonnet-20241022"
+  name: "claude-sonnet-4-5"
   temperature: 1
   max_tokens: 8192

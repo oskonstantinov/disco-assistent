@@ -8,16 +8,16 @@ class SoundManager:
         self._logger = logging.getLogger(__name__)
         pygame.mixer.init()
 
-        self.sfx_path = Path('sfx')
+        self.sfx_path = Path(__file__).parent
         self.sounds: Dict[str, pygame.mixer.Sound] = {}
 
         try:
-            self.sounds['startup'] = pygame.mixer.Sound(self.sfx_path / 'switch-04.wav')
-            self.sounds['click'] = pygame.mixer.Sound(self.sfx_path / 'dialogue-click.wav')
-            self.sounds['FYS'] = pygame.mixer.Sound(self.sfx_path / 'interface-skill-passiveFYS-03-01.wav')
-            self.sounds['INT'] = pygame.mixer.Sound(self.sfx_path / 'interface-skill-passiveINT-04-01.wav')
-            self.sounds['MOT'] = pygame.mixer.Sound(self.sfx_path / 'interface-skill-passiveMOT-04-01.wav')
-            self.sounds['PSY'] = pygame.mixer.Sound(self.sfx_path / 'interface-skill-passivePSY-04-02.wav')
+            self.sounds['startup'] = pygame.mixer.Sound(str(self.sfx_path / 'switch-04.wav'))
+            self.sounds['click'] = pygame.mixer.Sound(str(self.sfx_path / 'dialogue-click.wav'))
+            self.sounds['FYS'] = pygame.mixer.Sound(str(self.sfx_path / 'interface-skill-passiveFYS-03-01.wav'))
+            self.sounds['INT'] = pygame.mixer.Sound(str(self.sfx_path / 'interface-skill-passiveINT-04-01.wav'))
+            self.sounds['MOT'] = pygame.mixer.Sound(str(self.sfx_path / 'interface-skill-passiveMOT-04-01.wav'))
+            self.sounds['PSY'] = pygame.mixer.Sound(str(self.sfx_path / 'interface-skill-passivePSY-04-02.wav'))
             self._logger.info("Sound effects loaded successfully")
         except Exception as e:
             self._logger.error(f"Check failure: Failed to load sound effects: {e}")

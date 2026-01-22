@@ -1,7 +1,5 @@
-import json
 import asyncio
 import anthropic
-import os
 from ui.state_manager import DialogStateManager
 from config.prompts import SYSTEM_PROMPT
 from utils.logging import setup_logging
