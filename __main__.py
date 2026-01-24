@@ -23,7 +23,6 @@ async def main():
 
         base_prompt = SYSTEM_PROMPT
         user_context = config_manager.get_user_context()
-        custom_prompt = config_manager.get_custom_prompt()
 
         model_config = config_manager.get_model_config()
 
@@ -48,9 +47,6 @@ async def main():
 
                 if user_context:
                     final_prompt = f"{user_context}\n\n" + final_prompt
-
-                if custom_prompt:
-                    final_prompt = custom_prompt
 
                 with client.messages.stream(
                     model=model_config['name'],

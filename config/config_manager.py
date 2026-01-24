@@ -49,16 +49,19 @@ class ConfigManager:
     def get_language(self) -> str:
         return self._config.get('language', 'en')
 
-    def get_custom_prompt(self) -> Optional[str]:
-        prompt_config = self._config.get('custom_prompt', {})
-        if prompt_config.get('enabled', False):
-            return prompt_config.get('content')
-        return None
-
     def get_user_context(self) -> Optional[str]:
         context_config = self._config.get('user_context', {})
         if context_config.get('enabled', False):
-            return context_config.get('description')
+            file_path = context_config.get('file')
+            if file_path:
+                try:
+                    with open(file_path, 'r', encoding='utf-8') as f:
+                        return f.read().strip()
+                except FileNotFoundError:
+                    self._logger.warning(f"User context file not found: {file_path}")
+                except Exception as e:
+                    self._logger.error(f"Error reading user context file: {e}")
+            return None
         return None
 
     def get_model_config(self) -> Dict[str, Any]:

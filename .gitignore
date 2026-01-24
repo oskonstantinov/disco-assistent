@@ -181,3 +181,6 @@ logs/
 
 # API key
 .api_key
+
+# User context
+config/user_context.txt

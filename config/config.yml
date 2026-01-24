@@ -1,16 +1,10 @@
 # Application configuration
 language: ru  # Application language (can be en or ru)
 
-# Custom prompt configuration
-custom_prompt:
-  enabled: false  # Set to true to use custom prompt instead of default
-  content: ""     # Custom prompt content if enabled
-
 # User context configuration
 user_context:
-  enabled: false  # Set to true to include user context
-  description: |
-    Sample description of the user context that will be included in the prompts.
+  enabled: true  # Set to true to include user context
+  file: "config/user_context.txt"  # Path to user context file
 
 model:
   name: "claude-sonnet-4-5"
