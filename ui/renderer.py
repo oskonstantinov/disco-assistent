@@ -3,6 +3,7 @@ from rich.text import Text
 from rich.style import Style
 from blessed import Terminal
 from typing import Optional
+import shutil
 from models.skill_check import SkillCheck
 from config.constants import SKILL_COLORS
 from localization.locale_manager import LocaleManager
@@ -10,11 +11,17 @@ from config.config_manager import ConfigManager
 
 class DialogRenderer:
     def __init__(self, config_manager: Optional[ConfigManager] = None):
-        self.console = Console(width=72)
+        # Get current terminal width, fallback to 80 if unable to determine
+        try:
+            terminal_width = shutil.get_terminal_size().columns
+        except (OSError, AttributeError):
+            terminal_width = 80
+        
+        self.console = Console(width=terminal_width)
         self.term = Terminal()
         self.locale = LocaleManager(config_manager=config_manager)
         self.last_lines = 0
-        self.max_width = 72
+        self.max_width = terminal_width
         self.continue_shown = False
 
     def get_skill_color(self, skill_check: SkillCheck) -> str:
